@@ -1,25 +1,18 @@
-import Field from './Field/Field'
+import React from 'react'
+import { control } from 'react-validation';
+import PropTypes from 'prop-types';
 
-class Input extends Field{
-    
-    constructor(props) {
-        super(props);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
+const Input = ({ error, isChanged, isUsed, ...props }) => (
+  <div>
+    <input {...props} {...( isChanged && isUsed && error ? {
+      className: `is-invalid-input ${props.className}`
+    } : { className: props.className } )} />
+    {isChanged && isUsed && error}
+  </div>
+);
 
-    handleInputChange = function(event) {
-        const target = event.target;
-        this.props.update(this.props.name, target.value);
-    };
-      
-    render(){
-        return(
-            <input onChange={this.handleInputChange} className="text-field" value={this.value} namespace={this.props.namespace}  id={this.props.id}/>             
-        );
-    }
-}
-function mapStateToProps(state) {
-    return { manager: state.CompanyUsers.manager,  employee: state.CompanyUsers.employee}
-  }
+Input.propTypes = {
+  error: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
+};
 
-export default connect()(Input)
+export default control(Input);
