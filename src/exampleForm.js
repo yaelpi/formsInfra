@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Input from './components/controls/Input/Input';
 import Form from './components/controls/Form/Form';
 import hebrewValidations from './validations/languages';
+import Language from '../src/components/language/language';
+import injectWrapper from './core/inject'
 export default class ExampleForm extends Component { // destruct non-valid props
     constructor(props){
         super(props)
@@ -10,9 +12,13 @@ export default class ExampleForm extends Component { // destruct non-valid props
     validateAll= function(){
         this.Form.validateAll();
     }
+    
     render() {
+        const Wrappedlanguage = injectWrapper(Language)
         return(
             <Form ref={c => { this.Form = c }}>
+
+                <Wrappedlanguage/>
                 <div className="row">
                     <div className="col-md-4">
                         <label>
