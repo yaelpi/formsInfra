@@ -3,7 +3,10 @@ import Input from './components/controls/Input/Input';
 import Form from './components/controls/Form/Form';
 import hebrewValidations from './validations/languages';
 import Language from '../src/components/language/language';
+import PersonalInformation from '../src/components/PersonalInformation/PersonalInformation';
 import injectWrapper from './core/inject'
+import rootStore from './rootStore'
+
 export default class ExampleForm extends Component { // destruct non-valid props
     constructor(props){
         super(props)
@@ -15,30 +18,12 @@ export default class ExampleForm extends Component { // destruct non-valid props
     
     render() {
         const Wrappedlanguage = injectWrapper(Language)
+        const UserDetails = injectWrapper(PersonalInformation,{...rootStore.userDetails})
         return(
             <Form ref={c => { this.Form = c }}>
 
                 <Wrappedlanguage/>
-                <div className="row">
-                    <div className="col-md-4">
-                        <label>
-                            שם פרטי
-                        </label>
-                        <Input
-                        type="text"
-                        name="lastname"
-                        validations={[hebrewValidations.required]}/>
-                    </div>
-                    <div className="col-md-4">
-                        <label>
-                            שם משפחה
-                        </label>
-                        <Input
-                        type="text"
-                        name="lastname"
-                        validations={[hebrewValidations.required, hebrewValidations.hebrewName]}/>
-                    </div>
-                </div>
+                <UserDetails/>
                 <div className="row">
                     <div className="small-12 columns">
                         <button className="button" type="button" onClick={this.validateAll} >בדוק תקינות  </button>

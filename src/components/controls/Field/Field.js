@@ -1,21 +1,25 @@
 import React from 'react'
+import {observer} from 'mobx-react'
 
-class Field extends React.Component{
+@observer
+export default class Field extends React.Component{
     
     constructor(props) {
         super(props);
-        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.updateField = this.updateField.bind(this);
     }
 
-    handleFieldChange = function(event) {
+    updateField = function(event) {
         const target = event.target;
-        this.props.update(this.props.name, target.value);
+        this.props.field.update(target.value);
     };
       
     render(){
         return(
-            <input onChange={this.handleFieldChange} className="text-field" value={this.value} name={this.props.name}  id={this.props.id}/>             
+            <div>
+                <label>{this.props.label}</label>
+                <input onChange={(e)=>this.updateField(e)} value={this.props.field.value} className="text-field" />             
+            </div>
         );
     }
 }
-export default Field
