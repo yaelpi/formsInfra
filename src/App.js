@@ -6,7 +6,7 @@ import axiosWrapper from './networking/Axios';
 
 class App extends Component {
   componentDidMount(){
-    const getUrl = 'http://formsdev.vcloud.gov.il/govservicelist/DateTimeConverter/GetListOfHebrewYears?dateTimeModel={day:"1",month:"1",year:1918,startYear:0,endYear:200,type:1}';
+    const getUrl = '';
     const getSettings = {
       url: getUrl,
       method: 'GET'
@@ -17,7 +17,7 @@ class App extends Component {
     // const params = new URLSearchParams();
     // params.append('listName', 'City');
     const data = { listName: 'City' };
-    const postUrl = 'http://formsdev.vcloud.gov.il/govservicelist/ListProvider/GetList';
+    const postUrl = '';
     const postSettings = {
       url: postUrl,
       method: 'POST',
