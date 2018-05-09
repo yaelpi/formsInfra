@@ -4,15 +4,11 @@ const messages = {
     missinggRequiredParams: 'URL and method (GET/POST) parameters are mandatory',
 };
 
-const notFound = -1;
-
 const validMethod = function (method) {
-    var validMethods = ['GET', 'POST'];
-
-    return validMethods.indexOf(method) !== notFound;
+    return ['GET', 'POST'].includes(method);
 };
 
-const checkRequiredParams = function (settings) {
+const checkRequiredParams = function (settings) {    
     return (typeof settings === 'object' && 'url' in settings && validMethod(settings['method']));
 };
 
